@@ -3,3 +3,4 @@ Team:
 Samuel Chacon
 Diego Arriola 
 Trevor Jones
+Miguel Arcos
