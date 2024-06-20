@@ -7,7 +7,20 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+
+  console.log(localStorage.getItem(key));
+
+  const data = localStorage.getItem(key);
+
+
+  try {
+    const parsedData = data ? JSON.parse(data) : [];
+    return Array.isArray(parsedData) ? parsedData : [parsedData];
+
+  } catch (error) {
+    console.error('Error parsing JSON from localStorage:', error);
+    return [];
+  }
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
@@ -20,4 +33,9 @@ export function setClick(selector, callback) {
     callback();
   });
   qs(selector).addEventListener("click", callback);
+}
+// funciton to getParam
+export function getParam(paramName) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(paramName);
 }

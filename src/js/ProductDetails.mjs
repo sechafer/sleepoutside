@@ -35,6 +35,10 @@ export default class ProductDetails {
     }
 
     addToCart() {
+
+
+        console.log('this.product:', this.product );
+
         setLocalStorage("so-cart", this.product);
     }
 

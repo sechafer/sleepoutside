@@ -1,9 +1,20 @@
 import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
+
   const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+  console.log('cart->cartItems:',cartItems);
+   
+  // Verificar si cartItems es un array
+  if (Array.isArray(cartItems)) {
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  } else {
+    console.error('cartItems is not Array:-->', cartItems, '<--');
+    document.querySelector(".product-list").innerHTML = '';
+  }
+
 }
 
 function cartItemTemplate(item) {
