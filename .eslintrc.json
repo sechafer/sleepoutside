@@ -45,5 +45,14 @@
       }
     ],
     "no-unused-expressions": "off"
-  }
+  }  
+  ,
+  "overrides": [
+    {
+      "files": ["vite.config.js"], // reemplaza con la ruta correcta al archivo vite
+      "rules": {
+        "import/namespace": "off" // Ignorar errores de importación en este archivo
+      }
+    }
+  ]
 }
