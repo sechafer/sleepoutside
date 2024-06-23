@@ -1,9 +1,12 @@
 import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
+  const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  const productListElement = document.querySelector(".product-list");
+  if (productListElement) {
+    productListElement.innerHTML = htmlItems.join("");
+  }
 }
 
 function cartItemTemplate(item) {
@@ -25,7 +28,17 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+export function updateCartCount() {
+  const cart = getLocalStorage("so-cart") || [];
+  const cartCountElement = document.getElementById("cartCount");
 
+  if (cart.length > 0) {
+    cartCountElement.textContent = cart.length;
+    cartCountElement.style.display = "inline";
+  } else {
+    cartCountElement.style.display = "none";
+  }
+}
 
 document.addEventListener("click", function(event){
   if (event.target.classList.contains("deleteBtn")){
@@ -40,4 +53,6 @@ function removeItem(itemid){
   localStorage.setItem("so-cart", JSON.stringify(cart));
   renderCartContents();
 }
+
 renderCartContents();
+updateCartCount();

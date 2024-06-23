@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs"; // This script file will contain the code to dynamically produce the product detail pages.
+import { updateCartCount } from "./cart.js";
 
 function productDetailsTemplate(product) {
     return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
@@ -39,6 +40,7 @@ export default class ProductDetails {
         this.product = await this.dataSource.findProductById(e.target.dataset.id);
         this.cart.unshift(this.product);
         setLocalStorage("so-cart", this.cart);
+        updateCartCount();
     }
 
     renderProductDetails(selector) {
