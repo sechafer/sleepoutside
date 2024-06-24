@@ -1,10 +1,9 @@
 import ProductData from "./ProductData.mjs";
-import ProductList from "./ProductList.mjs";
-import { updateCartCount } from "./cart";
+import ProductDetails from "./ProductDetails.mjs";
+import { getParam } from "./utils.mjs";
 
+const productId = getParam("product");
 const dataSource = new ProductData("tents");
-const element = document.querySelector(".product-list");
-const productListing = new ProductList("tents", dataSource, element);
 
-productListing.init();
-updateCartCount();
+const product = new ProductDetails(productId, dataSource);
+product.init();
