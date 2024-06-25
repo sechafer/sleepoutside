@@ -9,6 +9,19 @@ function renderCartContents() {
   }
 }
 
+function getTotal() {
+  const cartItems = getLocalStorage("so-cart");
+
+  if (cartItems.length > 0) {
+    const total = cartItems.reduce((acc, item) => acc + item.ListPrice, 0);
+
+    const cartTotal = document.querySelector(".cart-total");
+    cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+  }
+}
+
+getTotal();
+
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
