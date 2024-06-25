@@ -1,4 +1,4 @@
-import { setLocalStorage } from "./utils.mjs"; // This script file will contain the code to dynamically produce the product detail pages.
+import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs"; // This script file will contain the code to dynamically produce the product detail pages.
 
 function showPriceOfProducts(FinalPrice,SuggestedRetailPrice){
     if( FinalPrice < SuggestedRetailPrice){
@@ -42,8 +42,12 @@ export default class ProductDetails {
         .addEventListener("click", this.addToCart.bind(this));
     }
 
-    addToCart() {
-        setLocalStorage("so-cart", this.product);
+    async addToCart(e) {
+        this.cart = getLocalStorage("so-cart") || [];
+        this.product = await this.dataSource.findProductById(e.target.dataset.id);
+        this.cart.unshift(this.product);
+        setLocalStorage("so-cart", this.cart);
+        updateCartCount();
     }
 
     renderProductDetails(selector) {

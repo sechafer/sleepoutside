@@ -1,9 +1,12 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, updateCartCount } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
+  const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  const productListElement = document.querySelector(".product-list");
+  if (productListElement) {
+    productListElement.innerHTML = htmlItems.join("");
+  }
 }
 
 function getTotal() {
@@ -47,8 +50,11 @@ document.addEventListener("click", function (event) {
 
 function removeItem(itemid) {
   let cart = getLocalStorage("so-cart");
-  cart = cart.filter((x) => x.Id !== itemid);
+  cart = cart.filter((x) => x.Id !== itemid.trim());
   localStorage.setItem("so-cart", JSON.stringify(cart));
   renderCartContents();
+  updateCartCount();
 }
+
 renderCartContents();
+updateCartCount();
