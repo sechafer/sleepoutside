@@ -37,8 +37,6 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-
-
 export function updateCartCount() {
   const cart = getLocalStorage("so-cart") || [];
   const cartCountElement = document.getElementById("cartCount");
