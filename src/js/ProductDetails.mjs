@@ -1,5 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs"; // This script file will contain the code to dynamically produce the product detail pages.
-import { updateCartCount } from "./cart.js";
+import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs"; // This script file will contain the code to dynamically produce the product detail pages.
 
 function productDetailsTemplate(product) {
     return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>

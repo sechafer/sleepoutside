@@ -36,3 +36,17 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+
+
+export function updateCartCount() {
+  const cart = getLocalStorage("so-cart") || [];
+  const cartCountElement = document.getElementById("cartCount");
+
+  if (cart.length > 0) {
+    cartCountElement.textContent = cart.length;
+    cartCountElement.style.display = "inline";
+  } else {
+    cartCountElement.style.display = "none";
+  }
+}
