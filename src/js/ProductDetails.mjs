@@ -1,5 +1,12 @@
 import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs"; // This script file will contain the code to dynamically produce the product detail pages.
 
+function showPriceOfProducts(FinalPrice,SuggestedRetailPrice){
+    if( FinalPrice < SuggestedRetailPrice){
+        return FinalPrice + ' Discount:' + ((FinalPrice/SuggestedRetailPrice)*100).toFixed(2) +'% OFF';
+    } 
+    return FinalPrice ;
+}
+
 function productDetailsTemplate(product) {
     return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
       <h2 class="divider">${product.NameWithoutBrand}</h2>
@@ -8,7 +15,8 @@ function productDetailsTemplate(product) {
         src="${product.Image}"
         alt="${product.NameWithoutBrand}"
       />
-      <p class="product-card__price">$${product.FinalPrice}</p>
+      
+      <p class="product-card__price">$${ showPriceOfProducts ( product.FinalPrice,product.SuggestedRetailPrice) }</p>
       <p class="product__color">${product.Colors[0].ColorName}</p>
       <p class="product__description">
       ${product.DescriptionHtmlSimple}

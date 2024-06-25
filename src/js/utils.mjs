@@ -37,8 +37,6 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-
-
 export function updateCartCount() {
   const cart = getLocalStorage("so-cart") || [];
   const cartCountElement = document.getElementById("cartCount");
@@ -49,4 +47,12 @@ export function updateCartCount() {
   } else {
     cartCountElement.style.display = "none";
   }
+}
+
+// helper to get parameter strings
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get(param);
+  return product;
 }
