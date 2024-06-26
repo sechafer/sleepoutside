@@ -34,7 +34,7 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1<span data-id= "${item.Id} " class="deleteBtn"> ❌</span></p>
+    <p class="cart-card__quantity">qty: 1<span data-id= "${item.Id} " UUID= "${item.UUID} " class="deleteBtn"> ❌</span></p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
@@ -43,14 +43,14 @@ function cartItemTemplate(item) {
 
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("deleteBtn")) {
-    const itemid = event.target.getAttribute("data-id");
-    removeItem(itemid);
+    const UUID = event.target.getAttribute("UUID");
+    removeItem(UUID);
   }
 });
 
-function removeItem(itemid) {
+function removeItem(UUID) {
   let cart = getLocalStorage("so-cart");
-  cart = cart.filter((x) => x.Id !== itemid.trim());
+  cart = cart.filter((x) => x.UUID !== UUID.trim());
   localStorage.setItem("so-cart", JSON.stringify(cart));
   renderCartContents();
   updateCartCount();

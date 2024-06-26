@@ -1,8 +1,8 @@
 import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs"; // This script file will contain the code to dynamically produce the product detail pages.
 
 function showPriceOfProducts(FinalPrice,SuggestedRetailPrice){
-    if( FinalPrice < SuggestedRetailPrice){
-        return FinalPrice + ' Discount:' + ((FinalPrice/SuggestedRetailPrice)*100).toFixed(2) +'% OFF';
+    if(FinalPrice < SuggestedRetailPrice){
+        return FinalPrice + " Discount:" + ((FinalPrice / SuggestedRetailPrice) * 100).toFixed(2) + "% OFF";
     } 
     return FinalPrice ;
 }
@@ -16,7 +16,7 @@ function productDetailsTemplate(product) {
         alt="${product.NameWithoutBrand}"
       />
       
-      <p class="product-card__price">$${ showPriceOfProducts ( product.FinalPrice,product.SuggestedRetailPrice) }</p>
+      <p class="product-card__price">$${ showPriceOfProducts (product.FinalPrice, product.SuggestedRetailPrice) }</p>
       <p class="product__color">${product.Colors[0].ColorName}</p>
       <p class="product__description">
       ${product.DescriptionHtmlSimple}
@@ -45,6 +45,7 @@ export default class ProductDetails {
     async addToCart(e) {
         this.cart = getLocalStorage("so-cart") || [];
         this.product = await this.dataSource.findProductById(e.target.dataset.id);
+        this.product.UUID = Date.now() + Math.random().toString(36).substring(2, 9);
         this.cart.unshift(this.product);
         setLocalStorage("so-cart", this.cart);
         updateCartCount();
