@@ -2,7 +2,7 @@ import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
 
 function showPriceOfProducts(FinalPrice,SuggestedRetailPrice){
     if(FinalPrice < SuggestedRetailPrice){
-        return FinalPrice + " Discount:" + ((FinalPrice / SuggestedRetailPrice) * 100).toFixed(2) + "% OFF";
+        return FinalPrice + " Discount: " + ((FinalPrice / SuggestedRetailPrice) * 100).toFixed(2) + "% OFF";
     } 
     return FinalPrice ;
 }
@@ -58,4 +58,5 @@ export default class ProductDetails {
             productDetailsTemplate(this.product)
         );
     }
+
 }
