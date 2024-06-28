@@ -168,7 +168,7 @@ button {
 .product-type {
   flex: 1 1 5%;
   border: 1px solid var(--light-grey);
-  max-width: 200px;  
+  max-width: 200px;
 }
 
 .product-card {
