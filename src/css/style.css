@@ -94,6 +94,9 @@ button {
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
+.title {
+  text-transform: capitalize;
+}
 /* End utility classes */
 
 /* Cart icon styles */
@@ -146,6 +149,28 @@ button {
   color: var(--dark-grey);
 }
 /* Styles for product lists */
+
+.type-list {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  list-style-type: none;
+  gap: 10px;
+  padding: 0;
+}
+.type-list a {
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.product-type {
+  flex: 1 1 5%;
+  border: 1px solid var(--light-grey);
+  max-width: 200px;
+}
+
 .product-card {
   flex: 1 1 45%;
   margin: 0.25em;
@@ -156,6 +181,10 @@ button {
 .product-card h2,
 .product-card h3,
 .product-card p {
+  margin: 0.5em 0;
+}
+
+.card__name {
   margin: 0.5em 0;
 }
 

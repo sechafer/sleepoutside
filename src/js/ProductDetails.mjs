@@ -2,7 +2,7 @@ import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
 
 function showPriceOfProducts(FinalPrice,SuggestedRetailPrice){
     if(FinalPrice < SuggestedRetailPrice){
-        return FinalPrice + " Discount:" + ((FinalPrice / SuggestedRetailPrice) * 100).toFixed(2) + "% OFF";
+        return FinalPrice + " Discount: " + ((FinalPrice / SuggestedRetailPrice) * 100).toFixed(2) + "% OFF";
     } 
     return FinalPrice ;
 }
@@ -12,7 +12,7 @@ function productDetailsTemplate(product) {
       <h2 class="divider">${product.NameWithoutBrand}</h2>
       <img
         class="divider"
-        src="${product.Image}"
+        src="${product.Images.PrimaryLarge}"
         alt="${product.NameWithoutBrand}"
       />
       
@@ -58,4 +58,5 @@ export default class ProductDetails {
             productDetailsTemplate(this.product)
         );
     }
+
 }
