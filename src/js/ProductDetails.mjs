@@ -45,8 +45,13 @@ export default class ProductDetails {
     async addToCart(e) {
         this.cart = getLocalStorage("so-cart") || [];
         this.product = await this.dataSource.findProductById(e.target.dataset.id);
-        this.product.UUID = Date.now() + Math.random().toString(36).substring(2, 9);
-        this.cart.unshift(this.product);
+        const existingProduct = this.cart.find((product) => product.Id == this.product.Id)
+        if (existingProduct) {
+            existingProduct.quantity += 1;
+        } else {
+            this.product.quantity = 1;
+            this.cart.unshift(this.product);
+        }
         setLocalStorage("so-cart", this.cart);
         updateCartCount();
     }

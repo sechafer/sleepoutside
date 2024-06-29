@@ -3,8 +3,8 @@ import ShoppingCart from "./ShoppingCart.mjs";
 
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("deleteBtn")) {
-    const UUID = event.target.getAttribute("UUID");
-    cart.removeItem(UUID);
+    const id = event.target.getAttribute("data-id");
+    cart.removeItem(id);
   }
 });
 

@@ -125,6 +125,16 @@ button {
   fill: gray;
 }
 
+.quantityInput {
+  width: 4em; /* Small enough to hold 2 characters */
+  text-align: center; /* Center align the text inside the input */
+  margin-right: 0.5em; /* Add some space between the input and the delete button */
+}
+
+.deleteBtn {
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
 /* End cart icon style */
 
 .mission {
