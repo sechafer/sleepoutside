@@ -37,10 +37,7 @@ export default class ShoppingCart {
           productListElement.innerHTML = htmlItems.join("");
         }
     }
-    getSubtotal(){
-
-      const getSubtotal = 
-    }
+    
       
     getTotal() {
     const cartItems = getLocalStorage("so-cart");
