@@ -14,7 +14,7 @@ function cartItemTemplate(item) {
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <p class="cart-card__quantity">
       qty: 
-      <input type="number" value="${item.quantity}" data-uuid="${item.UUID}" class="quantityInput" min="1" maxlength="2" />
+      <input type="number" value="${item.quantity}" data-id="${item.Id}" class="quantityInput" min="1" maxlength="2" />
       <span data-id="${item.Id}" class="deleteBtn"> ❌</span>
     </p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
@@ -43,12 +43,23 @@ export default class ShoppingCart {
     const cartTotal = document.querySelector(".cart-total");
 
         if (cartItems.length > 0) {
-            const total = cartItems.reduce((acc, item) => acc + item.ListPrice, 0);
+            const total = cartItems.reduce((acc, item) => acc + (item.ListPrice * item.quantity), 0);
             cartTotal.textContent = `Total: $${total.toFixed(2)}`;
         } else {
             cartTotal.textContent = `Total: $0.00`
         }
     }      
+
+    updateItemQuantity(id, quantity) {
+        let cart = getLocalStorage(this.key);
+        const itemIndex = cart.findIndex((item) => item.Id === id.trim());
+        if (itemIndex > -1) {
+            cart[itemIndex].quantity = quantity;
+            localStorage.setItem(this.key, JSON.stringify(cart));
+            this.getTotal();
+            updateCartCount();
+        }
+      }
 
     removeItem(id) {
     let cart = getLocalStorage("so-cart");
