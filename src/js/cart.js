@@ -13,7 +13,6 @@ document.addEventListener("change", function (event) {
     const id = event.target.getAttribute("data-id");
     const quantity = parseInt(event.target.value, 10);
     if (quantity > 0) {
-      console.log(id)
       cart.updateItemQuantity(id, quantity);
     }
   }
