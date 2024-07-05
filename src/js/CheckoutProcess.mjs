@@ -1,17 +1,17 @@
 import { getLocalStorage } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 
-const ProdData = new ProductData();
+const ExtServices = new ExternalServices();
 
 function formDataToJSON(formElement) {
-    const formData = new formData(formElement)
-    const convertedJSON = {};
-
-    formData.foreach(function (value, key) {
-        convertedJSON[key] = value;
+    const formData = new FormData(formElement),
+      convertedJSON = {};
+  
+    formData.forEach(function (value, key) {
+      convertedJSON[key] = value;
     });
-
-    return convertedJSON
+  
+    return convertedJSON;
 }
 
 function packageItems(items) {
@@ -57,7 +57,6 @@ function packageItems(items) {
     calculateOrdertotal() {
       this.shipping = 10 + (this.list.length - 1) * 2;
       this.tax = (this.itemTotal * 0.06).toFixed(2);
-      console.log(this.tax)
       this.orderTotal = (
         parseFloat(this.itemTotal) +
         parseFloat(this.shipping) +
@@ -87,7 +86,7 @@ function packageItems(items) {
       json.items = packageItems(this.list);
       console.log(json);
       try {
-        const res = await ProdData.checkout(json);
+        const res = await ExtServices.checkout(json);
         console.log(res);
       } catch (err) {
         console.log(err);
