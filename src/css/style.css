@@ -293,6 +293,30 @@ input[type="submit"]:hover {
   margin-top: 20px;
   border-radius: 5px;
 }
+input:focus {
+  border-color: #ccc;
+}
+input:invalid {
+  border-color: red;
+}
+input:required:focus:valid {
+  background-color:lightgreen;
+}
+input:focus:invalid {
+  background-color:lightsalmon;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: var(--primary-color);
+  border: 1px solid darkorange;
+}
+.alert > p {
+  margin: 0;
+}
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

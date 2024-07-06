@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs"; // This script file will contain the code to dynamically produce the product detail pages.
+import { alertMessage, getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs"; // This script file will contain the code to dynamically produce the product detail pages.
 
 function showPriceOfProducts(FinalPrice,SuggestedRetailPrice){
     if(FinalPrice < SuggestedRetailPrice){
@@ -53,6 +53,9 @@ export default class ProductDetails {
             this.cart.unshift(this.product);
         }
         setLocalStorage("so-cart", this.cart);
+        if (document.querySelectorAll(".alert").length == 0) {
+            alertMessage("Cart Updated!", false, 1000)
+        }
         updateCartCount();
     }
 
