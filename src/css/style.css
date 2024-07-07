@@ -213,9 +213,33 @@ button {
   margin: auto;
 }
 
+/* aqui debo trabajar tarea 1 */
 .product-detail img {
   width: 100%;
 }
+
+
+/*  Solution for  screen with  greater tham 1200px */
+@media (min-width: 1200px) {
+  .product-detail img {
+    width: 80%;
+  }
+}
+
+/*  Solution for  screen between 768px and 1199px */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .product-detail img {
+    width: 60%;
+  }
+}
+
+/* Solution for  screen with  768px width*/
+@media (max-width: 767px) {
+  .product-detail img {
+    width: 40%;
+  }
+}
+
 
 /* Start cart list card styles */
 .cart-card {
