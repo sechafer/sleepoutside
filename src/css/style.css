@@ -255,7 +255,8 @@ button {
 
 /* Define the animation */
 @keyframes cartBounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -315,10 +316,10 @@ input:invalid {
   border-color: red;
 }
 input:required:focus:valid {
-  background-color:lightgreen;
+  background-color: lightgreen;
 }
 input:focus:invalid {
-  background-color:lightsalmon;
+  background-color: lightsalmon;
 }
 
 .alert {
