@@ -21,4 +21,4 @@ Use this as a starting point to complete the WDD 330 team activity: the SleepOut
 
 
 --link project
-https://deploy-preview-10--clever-kulfi-76e708.netlify.app/
+https://clever-kulfi-76e708.netlify.app/
