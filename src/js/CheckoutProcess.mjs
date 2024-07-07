@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { removeAllAlerts, alertMessage, getLocalStorage, setLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const ExtServices = new ExternalServices();
@@ -91,8 +91,14 @@ function packageItems(items) {
       try {
         const res = await ExtServices.checkout(json);
         console.log(res);
+        setLocalStorage("so-cart", []);
+        location.assign("/checkout/success.html");
       } catch (err) {
+        removeAllAlerts();
         console.log(err);
+        for (let message in err.message) {
+            alertMessage(err.message[message]);
+        }
       }
     }
   }
