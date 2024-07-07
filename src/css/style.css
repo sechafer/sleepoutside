@@ -253,6 +253,22 @@ button {
   grid-column: 3;
 }
 
+/* Define the animation */
+@keyframes cartBounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Animation class */
+.cart-bounce {
+  animation: cartBounce 0.5s ease;
+}
+
 /* CART FORM  */
 
 .cart-form-container {
@@ -292,6 +308,30 @@ input[type="submit"]:hover {
   padding: 10px;
   margin-top: 20px;
   border-radius: 5px;
+}
+input:focus {
+  border-color: #ccc;
+}
+input:invalid {
+  border-color: red;
+}
+input:required:focus:valid {
+  background-color: lightgreen;
+}
+input:focus:invalid {
+  background-color: lightsalmon;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: var(--primary-color);
+  border: 1px solid darkorange;
+}
+.alert > p {
+  margin: 0;
 }
 @media screen and (min-width: 500px) {
   body {

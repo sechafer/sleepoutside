@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { removeAllAlerts, alertMessage, getLocalStorage, setLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const ExtServices = new ExternalServices();
@@ -21,7 +21,7 @@ function packageItems(items) {
         id: item.Id,
         price: item.FinalPrice,
         name: item.Name,
-        quantity: 1,
+        quantity: item.quantity,
       };
     });
     return simplifiedItems;
@@ -48,22 +48,25 @@ function packageItems(items) {
       const itemNumElement = document.querySelector(
         this.outputSelector + " #num-items"
       );
-      itemNumElement.innerText = this.list.length;
+      // Calculate total number of items
+      const totalItems = this.list.reduce((acc, item) => acc + item.quantity, 0);
+      itemNumElement.innerText = totalItems;
       // calculate the total of all the items in the cart
-      const amounts = this.list.map((item) => item.FinalPrice);
+      const amounts = this.list.map((item) => item.FinalPrice * item.quantity);
       this.itemTotal = amounts.reduce((sum, item) => sum + item);
       summaryElement.innerText = "$" + this.itemTotal;
     }
     calculateOrdertotal() {
-      this.shipping = 10 + (this.list.length - 1) * 2;
-      this.tax = (this.itemTotal * 0.06).toFixed(2);
-      this.orderTotal = (
-        parseFloat(this.itemTotal) +
-        parseFloat(this.shipping) +
-        parseFloat(this.tax)
-      ).toFixed(2);
-      this.displayOrderTotals();
-    }
+        const totalItems = this.list.reduce((acc, item) => acc + item.quantity, 0);
+        this.shipping = 10 + (totalItems - 1) * 2;
+        this.tax = (this.itemTotal * 0.06).toFixed(2);
+        this.orderTotal = (
+          parseFloat(this.itemTotal) +
+          parseFloat(this.shipping) +
+          parseFloat(this.tax)
+        ).toFixed(2);
+        this.displayOrderTotals();
+      }
     displayOrderTotals() {
       const shipping = document.querySelector(this.outputSelector + " #shipping");
       const tax = document.querySelector(this.outputSelector + " #tax");
@@ -88,8 +91,14 @@ function packageItems(items) {
       try {
         const res = await ExtServices.checkout(json);
         console.log(res);
+        setLocalStorage("so-cart", []);
+        location.assign("/checkout/success.html");
       } catch (err) {
+        removeAllAlerts();
         console.log(err);
+        for (let message in err.message) {
+            alertMessage(err.message[message]);
+        }
       }
     }
   }
