@@ -57,6 +57,13 @@ export default class ProductDetails {
             alertMessage("Cart Updated!", false, 1000)
         }
         updateCartCount();
+
+        const cartIcon = document.querySelector(".cartIcon");
+        cartIcon.classList.add("cart-bounce");
+
+        setTimeout(() => {
+            cartIcon.classList.remove("cart-bounce");
+        }, 500);
     }
 
     renderProductDetails(selector) {
