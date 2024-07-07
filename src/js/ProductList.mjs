@@ -15,14 +15,26 @@ function productCardTemplate(product) {
 
 export default class ProductList {
     
-    constructor(category, dataSource, listElement) {
+    constructor(category, dataSource, listElement , sortBy) {
         this.category = category;
         this.dataSource = dataSource;
         this.listElement = listElement;
+        this.sortBy=sortBy;
         }
 
     async init() {
+        console.log('Init ProductList');
+        console.log(' sortBy',this.sortBy);
         const list = await this.dataSource.getData(this.category);
+        console.log(' list',list);
+        if(this.sortBy=="name"){
+             
+            list.sort((a, b) => a.Name.localeCompare(b.Name));
+
+        }else{
+            list.sort((a, b) => a.ListPrice - b.ListPrice);
+        }
+
         if (this.category == "tents") {
             const filteredList = this.fiterProducts(list);
             this.renderList(filteredList)
@@ -33,10 +45,13 @@ export default class ProductList {
     }
 
     renderList(list) {
+
+        console.log('ProductList renderList');
         renderListWithTemplate(productCardTemplate, this.listElement, list);
     }
 
     fiterProducts(list) {
+        console.log('ProductList fiterProducts');
         const ProdIDs = ["880RR","985RF","985PR","344YJ"]
         return list.filter(product => ProdIDs.includes(product.Id))
     }
